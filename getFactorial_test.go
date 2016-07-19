@@ -4,37 +4,25 @@ import (
 	"testing"
 )
 
-const successMessage = "Expected value matches the actual value!"
-const failureFormat = "Expected %d to equal %d"
-
-func TestItShouldComputeTheCorrectFactorial(t *testing.T) {
-	if actual, expected := GetFactorial(6), 720; actual != expected {
-		t.Errorf(failureFormat, actual, expected)
-	} else {
-		t.Log(successMessage)
+func TestFactorial(t *testing.T) {
+	
+	var tests = []struct{
+		N int
+		Fac int
+	}{
+		{0, 1},
+		{1, 1},
+		{2, 2},
+		{3, 6},
+		{4, 24},
+		{6, 720},
+		{10, 3628800},
 	}
-}
-
-func TestItShouldComputeOneForOne(t *testing.T) {
-	if actual, expected := GetFactorial(1), 1; actual != expected {
-		t.Errorf(failureFormat, actual, expected)
-	} else {
-		t.Log(successMessage)
-	}
-}
-
-func TestItShouldComputeOneForZero(t *testing.T) {
-	if actual, expected := GetFactorial(0), 1; actual != expected {
-		t.Errorf(failureFormat, actual, expected)
-	} else {
-		t.Log(successMessage)
-	}
-}
-
-func TestItShouldReturnAZeroValueForNegativeIntegers(t *testing.T) {
-	if actual, expected := GetFactorial(-1), 0; actual != expected {
-		t.Errorf(failureFormat, actual, expected)
-	} else {
-		t.Log(successMessage)
+	
+	for _, test := range tests {
+		f := GetFactorial(test.N)
+		if f != test.Fac {
+			t.Errorf("Factorial miscalculated - got %v, expected %v", f, test.Fac)
+		}
 	}
 }
