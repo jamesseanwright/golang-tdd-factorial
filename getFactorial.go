@@ -9,11 +9,5 @@ func GetFactorial(n int) (int) {
 		return 1
 	}
 
-	factorial := n
-
-	for i := n - 1; i > 0; i-- {
-		factorial *= i
-	}
-
-	return factorial
+	return n * GetFactorial(n - 1)
 }
